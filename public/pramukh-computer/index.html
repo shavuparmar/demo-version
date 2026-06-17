@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/pramukh-computer/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pramukhcomputer</title>
+  <script>
+    // Fix for React Router complaining about no routes matched
+    // It expects the app to be hosted at root '/'
+    if (window.location.pathname !== '/') {
+      window.history.replaceState(null, '', '/');
+    }
+  </script>
+  <script type="module" crossorigin src="/pramukh-computer/assets/index-BRBZJbGA.js"></script>
+  <link rel="stylesheet" crossorigin href="/pramukh-computer/assets/index-CmbIWlIC.css">
+</head>
+
+<body>
+  <div id="root"></div>
+</body>
+
+</html>
