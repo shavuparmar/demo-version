@@ -1,11 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Outfit', sans-serif;
+  --font-sans: 'Plus Jakarta Sans', 'Outfit', sans-serif;
+  --font-display: 'Outfit', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
   
   --color-primary-50: #eff6ff;
   --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
   --color-primary-300: #93c5fd;
   --color-primary-400: #60a5fa;
   --color-primary-500: #3b82f6;
@@ -14,61 +17,71 @@
 
   --color-secondary-50: #faf5ff;
   --color-secondary-100: #f3e8ff;
+  --color-secondary-200: #e9d5ff;
   --color-secondary-300: #d8b4fe;
   --color-secondary-400: #c084fc;
   --color-secondary-500: #a855f7;
   --color-secondary-600: #9333ea;
   --color-secondary-700: #7e22ce;
   
-  --color-dark-800: #1e1e24;
-  --color-dark-900: #0f1014;
-  --color-dark-950: #08080a;
+  --color-dark-800: #161922;
+  --color-dark-850: #11141B;
+  --color-dark-900: #0C0E14;
+  --color-dark-950: #07080B;
 }
 
 @layer base {
   body {
-    @apply font-sans bg-dark-950 text-white overflow-x-hidden antialiased;
+    @apply font-sans bg-[#07080B] text-slate-100 overflow-x-hidden antialiased;
   }
 }
 
 @layer utilities {
   .glass {
-    @apply bg-white/5 backdrop-blur-lg border border-white/10;
+    @apply bg-white/[0.04] backdrop-blur-xl border border-white/[0.08];
   }
   .glass-card {
-    @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)];
+    @apply bg-gradient-to-b from-white/[0.06] to-white/[0.02] backdrop-blur-xl border border-white/[0.08] shadow-[0_16px_40px_rgba(0,0,0,0.5)];
+  }
+  .glass-card-hover {
+    @apply transition-all duration-300 hover:border-blue-500/30 hover:shadow-[0_20px_50px_rgba(37,99,235,0.15)] hover:-translate-y-1.5;
+  }
+  .glass-input {
+    @apply bg-white/[0.03] backdrop-blur-md border border-white/[0.1] focus:border-blue-500/50 focus:bg-white/[0.06] focus:outline-none transition-all;
   }
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-secondary-500;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400;
   }
-  .text-gradient-hover {
-    @apply hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-primary-400 hover:to-secondary-400 transition-all duration-300;
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500;
   }
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
+  .bg-grid-pattern {
+    background-size: 36px 36px;
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   }
-}
-
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-  100% { transform: translateY(0px); }
+  .bg-radial-glow {
+    background: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.15) 0%, rgba(147, 51, 234, 0.05) 40%, transparent 70%);
+  }
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #08080a;
+  background: #07080B;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3b82f6;
-  border-radius: 4px;
+  background: #1e293b;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #9333ea;
+  background: #3b82f6;
 }

@@ -1,68 +1,53 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FiMessageCircle, FiPhoneCall, FiArrowUpRight } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { FiMessageSquare, FiArrowUp } from 'react-icons/fi';
 
 const FloatingElements = () => {
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 400);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-4">
+    <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3 pointer-events-auto">
       
-      {/* Get Quote Button */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 1 }}
-      >
-        <Link
-          to="/#contact"
-          className="flex items-center justify-center w-14 h-14 bg-gradient-to-tr from-primary-600 to-secondary-600 rounded-full text-white shadow-lg hover:shadow-primary-500/50 transition-all hover:-translate-y-1 group relative"
-          title="Get Quote"
+      {/* Scroll to top button */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="w-11 h-11 rounded-full bg-[#11141B] border border-white/10 text-slate-300 hover:text-white hover:bg-blue-600 hover:border-blue-500 shadow-xl flex items-center justify-center transition-all duration-300 hover:-translate-y-1"
+          title="Scroll to top"
+          aria-label="Scroll to top"
         >
-          <FiArrowUpRight className="text-2xl group-hover:rotate-45 transition-transform" />
-          <span className="absolute right-full mr-4 bg-dark-800 text-white text-xs px-3 py-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-white/10">
-            Get Quote
-          </span>
-        </Link>
-      </motion.div>
+          <FiArrowUp className="text-lg" />
+        </button>
+      )}
 
-      {/* Phone Button */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 1.1 }}
+      {/* Floating WhatsApp CTA */}
+      <a
+        href="https://wa.me/919879001603?text=Hi%20Deyzora,%20I%20am%20interested%20in%20a%20website%20demo%20and%20pricing."
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group flex items-center gap-2.5 pl-3.5 pr-4 py-2.5 bg-[#25D366] hover:bg-[#20ba59] text-white rounded-full shadow-[0_8px_30px_rgba(37,211,102,0.4)] transition-all duration-300 hover:-translate-y-1"
+        title="Chat on WhatsApp"
       >
-        <a
-          href="tel:+919876543210"
-          className="flex items-center justify-center w-14 h-14 bg-dark-800 border border-white/10 rounded-full text-white shadow-lg hover:bg-dark-700 transition-all hover:-translate-y-1 group relative"
-          title="Call Us"
-        >
-          <FiPhoneCall className="text-xl" />
-          <span className="absolute right-full mr-4 bg-dark-800 text-white text-xs px-3 py-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-white/10">
-            Call Us
-          </span>
-        </a>
-      </motion.div>
-
-      {/* WhatsApp Button */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 1.2 }}
-      >
-        <a
-          href="https://wa.me/919876543210"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center w-14 h-14 bg-[#25D366] rounded-full text-white shadow-lg hover:shadow-[#25D366]/50 transition-all hover:-translate-y-1 group relative animate-bounce"
-          title="WhatsApp Us"
-          style={{ animationDuration: '3s' }}
-        >
-          <FiMessageCircle className="text-2xl" />
-          <span className="absolute right-full mr-4 bg-dark-800 text-white text-xs px-3 py-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-white/10">
-            WhatsApp Us
-          </span>
-        </a>
-      </motion.div>
+        <span className="relative flex h-3 w-3">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+        </span>
+        <FiMessageSquare className="text-lg fill-current" />
+        <span className="text-xs font-bold tracking-wide">
+          Quick Inquiry
+        </span>
+      </a>
 
     </div>
   );
